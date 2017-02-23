@@ -9,7 +9,7 @@ function initLunr() {
             // Set up lunrjs by declaring the fields we use
             // Also provide their boost level for the ranking
             lunrIndex = new lunr.Index
-            lunrIndex.ref("href");
+            lunrIndex.ref("uri");
             lunrIndex.field('title', {
                 boost: 15
             });
@@ -41,8 +41,8 @@ function initLunr() {
 function search(query) {
     // Find the item in our index corresponding to the lunr one to have more info
     return lunrIndex.search(query).map(function(result) {
-        return pagesIndex.filter(function(currentPage) {
-            return currentPage.href === result.ref;
+        return pagesIndex.filter(function(page) {
+            return page.uri === result.ref;
         })[0];
     });
 }
@@ -63,7 +63,7 @@ $( document ).ready(function() {
             location.href=value.href;
         },
         render: function (li, suggestion) {
-            var uri = suggestion.href.substring(1,suggestion.href.length);
+            var uri = suggestion.uri.substring(1,suggestion.uri.length);
             var indexOfIndex = uri.lastIndexOf("/index");
             if (indexOfIndex == -1) {
                 indexOfIndex = uri.length;
