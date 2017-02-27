@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Omicsdi on OmicsDI Blog</title>
-    <link>https://omicsdi.github.io/tags/omicsdi/feed/index.xml</link>
-    <description>Recent content in Omicsdi on OmicsDI Blog</description>
+    <title>Introduction on OmicsDI Blog</title>
+    <link>https://omicsdi.github.io/categories/introduction/feed/index.xml</link>
+    <description>Recent content in Introduction on OmicsDI Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="https://omicsdi.github.io/tags/omicsdi/feed/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://omicsdi.github.io/categories/introduction/feed/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Welcome to OmicsDI Edu page</title>
