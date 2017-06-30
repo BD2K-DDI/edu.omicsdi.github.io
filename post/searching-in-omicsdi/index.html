@@ -138,8 +138,8 @@ OmicsDI has implemented a <strong>unique</strong> and <strong>novel</strong> <co
 <p>The <code>OmicsDI Search Box</code> is the main component to searching in OmicsDI. The <code>user</code> can type a set of <strong>keywords</strong> that will enable the system
 to find the datasets containing those keywords.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>If the user uses double quote <span class="s2">&quot;breast cancer&quot;</span> in their search the system will try to find the exact sentence in the datasets.
-</code></pre></div>
+
+If the user uses double quote "breast cancer" in their search the system will try to find the exact sentence in the datasets.
 
 
 <p>The <code>OmicsDI Search Box</code> provides a unique <strong>auto-complete</strong> feature that enables <code>user</code> to select sentence after typing a subset of keywords. For example,
@@ -245,8 +245,8 @@ of results is based on their relevance, i.e. the proximity of the terms in the e
 
 <p>The following characters within queries require to be escaped (using a &lsquo; \ &lsquo; before the character to escape) in order to be correctly interpreted:</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>+ - <span class="p">&amp;</span> <span class="p">|</span> ! <span class="o">(</span> <span class="o">)</span> <span class="o">{</span> <span class="o">}</span> <span class="o">[</span> <span class="o">]</span> ^ <span class="s2">&quot; ~ * ? : \ /</span>
-</code></pre></div>
+
++ - & | ! ( ) { } [ ] ^ " ~ * ? : \ /
 
 
 <p>Since Apache Lucene supports regular expression searches (matching a pattern between forwarding slashes) the forward slash &lsquo; / &rsquo; has become a special character to be escaped. For example to search for
@@ -382,6 +382,8 @@ that identified the current molecule.</p>
         <div class="collapse" id="tutorials" style="height: 0px;">
           <ul class="nav nav-list">
             
+            <li hugo-nav="/post/claiming-datasests/"><a href="https://omicsdi.github.io/post/claiming-datasests/"> Claiming datasets in OmicsDI </a> </li>
+            
             <li hugo-nav="/post/filter-results/"><a href="https://omicsdi.github.io/post/filter-results/"> Filtering search results </a> </li>
             
             <li hugo-nav="/post/searching-in-omicsdi/"><a href="https://omicsdi.github.io/post/searching-in-omicsdi/"> Searching in OmicsDI </a> </li>
@@ -420,7 +422,9 @@ that identified the current molecule.</p>
       
 			<li><a href="https://omicsdi.github.io/tags/api" title="api">api<sup>1</sup></a></li>
       
-			<li><a href="https://omicsdi.github.io/tags/auto-complete" title="auto-complete">auto-complete<sup>2</sup></a></li>
+			<li><a href="https://omicsdi.github.io/tags/auto-complete" title="auto-complete">auto-complete<sup>3</sup></a></li>
+      
+			<li><a href="https://omicsdi.github.io/tags/claiming" title="claiming">claiming<sup>1</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/data-dissemination" title="data-dissemination">data-dissemination<sup>1</sup></a></li>
       
@@ -436,11 +440,13 @@ that identified the current molecule.</p>
       
 			<li><a href="https://omicsdi.github.io/tags/introduction" title="introduction">introduction<sup>2</sup></a></li>
       
-			<li><a href="https://omicsdi.github.io/tags/keywords" title="keywords">keywords<sup>2</sup></a></li>
+			<li><a href="https://omicsdi.github.io/tags/keywords" title="keywords">keywords<sup>3</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/navigation" title="navigation">navigation<sup>1</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/omicsdi" title="omicsdi">omicsdi<sup>2</sup></a></li>
+      
+			<li><a href="https://omicsdi.github.io/tags/omicsdi-profile" title="omicsdi-profile">omicsdi-profile<sup>1</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/partners" title="partners">partners<sup>1</sup></a></li>
       
@@ -452,11 +458,11 @@ that identified the current molecule.</p>
       
 			<li><a href="https://omicsdi.github.io/tags/restful-api" title="restful-api">restful-api<sup>1</sup></a></li>
       
-			<li><a href="https://omicsdi.github.io/tags/search" title="search">search<sup>2</sup></a></li>
+			<li><a href="https://omicsdi.github.io/tags/search" title="search">search<sup>3</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/searching" title="searching">searching<sup>2</sup></a></li>
       
-			<li><a href="https://omicsdi.github.io/tags/tutorial" title="tutorial">tutorial<sup>4</sup></a></li>
+			<li><a href="https://omicsdi.github.io/tags/tutorial" title="tutorial">tutorial<sup>5</sup></a></li>
       
 			<li><a href="https://omicsdi.github.io/tags/web-components" title="web-components">web-components<sup>2</sup></a></li>
       
@@ -472,7 +478,7 @@ that identified the current molecule.</p>
       
       
       <li class="archive-list-item">
-        <a class="archive-list-link" href="https://omicsdi.github.io/post/#2017-02">2017/02/</a><span class="archive-list-count">6</span>
+        <a class="archive-list-link" href="https://omicsdi.github.io/post/#2017-02">2017/02/</a><span class="archive-list-count">7</span>
       </li>
       
     </ul>
@@ -489,6 +495,8 @@ that identified the current molecule.</p>
     <a href="https://omicsdi.github.io/tags/api" style="font-size: 12px;">api</a>
     
     <a href="https://omicsdi.github.io/tags/auto-complete" style="font-size: 12px;">auto-complete</a>
+    
+    <a href="https://omicsdi.github.io/tags/claiming" style="font-size: 12px;">claiming</a>
     
     <a href="https://omicsdi.github.io/tags/data-dissemination" style="font-size: 12px;">data-dissemination</a>
     
@@ -509,6 +517,8 @@ that identified the current molecule.</p>
     <a href="https://omicsdi.github.io/tags/navigation" style="font-size: 12px;">navigation</a>
     
     <a href="https://omicsdi.github.io/tags/omicsdi" style="font-size: 12px;">omicsdi</a>
+    
+    <a href="https://omicsdi.github.io/tags/omicsdi-profile" style="font-size: 12px;">omicsdi-profile</a>
     
     <a href="https://omicsdi.github.io/tags/partners" style="font-size: 12px;">partners</a>
     
