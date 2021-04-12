@@ -173,8 +173,8 @@ if (!doNotTrack) {
 <p>
 Each file in OmicsDI is indexed using <a href="https://www.ebi.ac.uk/ebisearch/overview.ebi/about">EBI Search System</a> and the final information is made available via web services. EBI Search System also contains indexes of other major databases such as Uniprot, Ensembl and PubMed, allowing data providers to cross-link biological entities in their datasets with those resources.</p>
 <p>
-  <sup>*</sup>For any queries about OmicsDi XML Format or data submissions to OmicsDI please contact:
-  <span class="badge badge-pill badge-primary">omicsdi-support@ebi.ac.uk</span>
+  <sup>*</sup>For any queries about OmicsDi XML Format or data submissions to OmicsDI please contact:<br />
+  <a href="mailto:omicsdi-support@ebi.ac.uk">omicsdi-support@ebi.ac.uk</a>
   </p>
 
 <h2 id="omics-xml-highlevel-structure">OmicsDI XML: High Level Structure</h2>
@@ -412,12 +412,14 @@ A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, 
   <p>
   Please note the following comments about the above fields:
   </p>
+  <p />
   <p>
     <sup><b>*</b></sup><i>repository</i>: The name of the repository should be provided at the dataset level because some providers can act as aggregators distributing datasets from different databases. In such cases the original repository should be provided using the field &lt;field name="repository"/&gt;.
   </p>
   <p>
     <sup><b>**</b></sup><i>publication</i>: Some resources do not provide information about the PubMed article in which the dataset was published. In such cases OmicsDI provides a mechanism to add the publication as free text by means of the field &lt;field name="publication"/&gt;.      
   </p>
+  <p />
   <p>
     The &lt;additional_fields&gt; section provides a mechanism for adding free text to OmicsDI XML and is important for search capabilities, however, is not well-designed for structured data where references and identifiers should be provided. For that information OmicsDI XML provides the &lt;cross_references&gt; section (see below).
   </p>
