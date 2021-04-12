@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+
+<link rel="canonical" href="https://omicsdi.github.io/post/omicsdi-spec/">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <title>OmicsDI Data Format Specification - OmicsDI Blog</title>
+    
+<meta name="description" content="The architecture of the Omics Discovery Index starts with an XML file that contains the information from all datasets in a given database. The XML files are retrieved from providers nightly, and every newly provided dataset is subsequently added to OmicsDI. Each file in OmicsDI is indexed using the EBI Search System and the final information is made available via web services. The EBI Search System also contains the index of other major databases such as Uniprot, Ensembl and Pubmed, allowing the user to cross-link the biological information with those resources.">
+
+<meta property="og:title" content="OmicsDI Data Format Specification - OmicsDI Blog">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://omicsdi.github.io/post/omicsdi-spec/">
+<meta property="og:image" content="https://omicsdi.github.io/images/default.png">
+<meta property="og:site_name" content="OmicsDI Blog">
+<meta property="og:description" content="The architecture of the Omics Discovery Index starts with an XML file that contains the information from all datasets in a given database. The XML files are retrieved from providers nightly, and every newly provided dataset is subsequently added to OmicsDI. Each file in OmicsDI is indexed using the EBI Search System and the final information is made available via web services. The EBI Search System also contains the index of other major databases such as Uniprot, Ensembl and Pubmed, allowing the user to cross-link the biological information with those resources.">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="OmicsDI Blog">
+<meta name="twitter:url" content="https://omicsdi.github.io/post/omicsdi-spec/">
+<meta name="twitter:title" content="OmicsDI Data Format Specification - OmicsDI Blog">
+<meta name="twitter:description" content="The architecture of the Omics Discovery Index starts with an XML file that contains the information from all datasets in a given database. The XML files are retrieved from providers nightly, and every newly provided dataset is subsequently added to OmicsDI. Each file in OmicsDI is indexed using the EBI Search System and the final information is made available via web services. The EBI Search System also contains the index of other major databases such as Uniprot, Ensembl and Pubmed, allowing the user to cross-link the biological information with those resources.">
+<meta name="twitter:image" content="https://omicsdi.github.io/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/omicsdi.github.io\/"
+    },
+    "headline": "OmicsDI Data Format Specification - OmicsDI Blog",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/omicsdi.github.io\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2017-02-27T22:56:34JST",
+    "dateModified": "2017-02-27T22:56:34JST",
+    "author": {
+      "@type": "Person",
+      "name": "OmicsDI Blog"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "OmicsDI Blog",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/omicsdi.github.io\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": "The architecture of the Omics Discovery Index starts with an XML file that contains the information from all datasets in a given database. The XML files are retrieved from providers nightly, and every newly provided dataset is subsequently added to OmicsDI. Each file in OmicsDI is indexed using the EBI Search System and the final information is made available via web services. The EBI Search System also contains the index of other major databases such as Uniprot, Ensembl and Pubmed, allowing the user to cross-link the biological information with those resources."
+  }
+</script>
+
+
+    <link href="https://omicsdi.github.io/css/styles.css" rel="stylesheet">
+    
+
+  </head>
+
+  <body>
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-70417662-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+
+    <header class="l-header">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://omicsdi.github.io/">OmicsDI Blog</a>
+          </div>
+
+          
+          <div id="navbar" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              
+              
+              <li><a href="/">Home</a></li>
+              
+              
+              
+              <li><a href="http://www.omicsdi.org">OmicsDI</a></li>
+              
+              
+              
+              <li><a href="http://github.com/OmicsDI">GitHub</a></li>
+              
+              
+            </ul>
+            
+          </div>
+          
+
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        
+<div class="row">
+  <div class="col-md-8">
+
+    <nav class="p-crumb">
+      <ol class="breadcrumb">
+        <li><a href="https://omicsdi.github.io/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+        
+        <li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="https://omicsdi.github.io/post/" itemprop="url"><span itemprop="title">post</span></a></li>
+        
+        <li class="active">OmicsDI Data Format Specification</li>
+      </ol>
+    </nav>
+
+    <article class="single">
+  <header>
+    <ul class="p-facts">
+      <li><i class="fa fa-calendar" aria-hidden="true"></i><time datetime="2017-02-27T22:56:34JST">Feb 27, 2017</time></li>
+      <li><i class="fa fa-bookmark" aria-hidden="true"></i><a href="https://omicsdi.github.io/post/">post</a></li>
+      
+    </ul>
+
+    <h1 class="title">OmicsDI Data Format Specification</h1>
+  </header>
+
+  
+
+  <div class="article-body">
+<p>
+  Omics Discovery Index (OmicsDI) expects data from Providers in common XML Format<sup>*</sup>.
+</p>
+<p>
+  <img src="../../img/omicsdi_arch.png" width="630" height="253"></img>
+</p>
+<p>The architecture of OmicsDI starts with an XML file that contains the information from all datasets in a given database. XML files are retrieved from providers nightly, and every new dataset in the provided XML file is added to OmicsDI automatically.
+</p>
+<p>
+Each file in OmicsDI is indexed using <a href="https://www.ebi.ac.uk/ebisearch/overview.ebi/about">EBI Search System</a> and the final information is made available via web services. EBI Search System also contains indexes of other major databases such as Uniprot, Ensembl and PubMed, allowing data providers to cross-link biological entities in their datasets with those resources.</p>
+<p>
+  <sup>*</sup>For any queries about OmicsDi XML Format or data submissions to OmicsDI please contact:
+  <span class="badge badge-pill badge-primary">omicsdi-support@ebi.ac.uk</span>
+  </p>
+
+<h2 id="omics-xml-highlevel-structure">OmicsDI XML: High Level Structure</h2>
+
+<p>The OmicsDI XML is used to represent metadata of any database (including all of its datasets) via the following common generic structure:</p>
+
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
+<span class="nt">&lt;database&gt;</span>
+  <span class="nt">&lt;name&gt;Database Name&lt;/name&gt;</span>
+  <span class="nt">&lt;description&gt;Database Description&lt;/description&gt;</span>
+  <span class="nt">&lt;release&gt;Release tag or number&lt;/release&gt;</span>
+  <span class="nt">&lt;release_date&gt;Release date&lt;/release_date&gt;</span>
+  <span class="nt">&lt;entry_count&gt;Number of entries&lt;/entry_count&gt;</span>
+  <span class="nt">&lt;entries&gt;</span>
+     <span class="nt">&lt;entry id=&#34;Dataset_ID_1&#34;&gt;</span>
+       <span class="nt">&lt;name&gt;Name of the Dataset&lt;/name&gt;</span>
+       <span class="nt">&lt;description&gt;Description of the dataset&lt;/description&gt;</span>
+       <span class="nt">&lt;cross_references&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;CHEBI:16551&#34; dbname=&#34;ChEBI&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;MTBLC16551&#34; dbname=&#34;MetaboLights&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;CHEBI:16810&#34; dbname=&#34;ChEBI&#34;&gt;</span>
+       <span class="nt">&lt;/cross_references&gt;</span>
+       <span class="nt">&lt;dates&gt;</span>
+         <span class="nt">&lt;date type=&#34;submission&#34; value=&#34;2013-11-19&#34;&gt;</span>
+         <span class="nt">&lt;date type=&#34;publication&#34; value=&#34;2013-11-26&#34;&gt;</span>
+       <span class="nt">&lt;/dates&gt;</span>
+       <span class="nt">&lt;additional_fields&gt;</span>
+         <span class="nt">&lt;field name=&#34;repository&#34;&gt;Repository&lt;/field&gt;</span>
+         <span class="nt">&lt;field name=&#34;omics_type&#34;&gt;Omics Type&lt;/field&gt;</span>
+       <span class="nt">&lt;/additional_fields&gt;</span>       
+     <span class="nt">&lt;/entry&gt;</span>
+  <span class="nt">&lt;/entries&gt;</span>
+<span class="nt">&lt;/database&gt;</span>
+</code></pre></div>
+
+<p>
+Cross references section allows for linking the dataset to external databases. The <i>dbkey</i> contains the dataset identifier in the linked database, itself identified via <i>dbname</i>.
+</p>
+<p>
+OmicsDI defines a hierarchical metadata schema for each dataset, divided into three main categories: <i>Mandatory</i>, <i>Recommended</i> and <i>Additional</i>. The scoring system in the OmicsDI search engine boosts datasets that provide more metadata, thus rewarding researchers that have annotated their results more thoroughly. The following tables describe the metadata fields for each category, with examples and description in each case. This document describes the structure of OmicsDI schema version 1.0, the corresponding metadata fields and types of fields. For each field in OmicsDI schema we have defined three types of categories:
+  <li><i>Mandatory</i> (<b>M</b>) : These fields must be provided for the OmicsDI schema to be valid, and are part of the minimum information required to represent a dataset in OmicsDI;</li>
+  <li><i>Recommended</i> (<b>R</b>) : These fields should be provided to be searchable and displayed adequately in OmicsDI web interface and web services;</li>
+  <li><i>Additional</i> (<b>A</b>) : These fields should be provided to add value to the dataset - the more metadata a dataset contains, the more sense OmicsDI infrastructure can make out of the data. For example, if the proteins, genes or metabolites are provided for each dataset; OmicsDI is able to find other datasets where those biological entities have been found or studied.</li>
+</p>
+
+<h2 id="omics-xml-db-section">OmicsDI XML: Database Section</h2>
+<p>
+All the information required for inclusion in OmicsDI is contained within the database section of the XML file (see generic structure above):
+</p>
+<table class="table table-striped">
+  <tr>
+    <th scope="col" class="col-md-2">Field</th>
+    <th scope="col" class="col-md-5">Comment</th>
+    <th scope="col" class="col-md-5">Example</th>
+    <th scope="col" class="col-md-1">Type</th>
+  </tr>
+  <tr>
+    <td>name</td><td>Name of the database or provider</td><td>&lt;name&gt;PRIDE&lt;/name&gt;</td><td>M</td>
+  </tr>
+  <tr>
+    <td>description</td><td>A short description of the provider. This description is shown in OmicsDI web interface and can be used in OmicsDI search.</td><td>&lt;description&gt;The proteomics identification database is an EBI resource for Proteomics&lt;/description&gt;</td><td>R<td>
+  </tr>
+  <tr>
+    <td>release</td><td>The tag for the database release to which the data belongs.</td><td>&lt;release&gt;Release-May-2016&lt;/release&gt;</td><td>A</td>
+  </tr>
+  <tr>
+    <td>release_date</td><td>The date of the database release to which the data belongs. This field may be used to store the date the data was generated, if applicable.</td><td>&lt;release_date&gt;2015-05-13&lt;/release_date&gt;</td><td>R</td>
+  </tr>
+  <tr>
+    <td>entry_count</td><td>The number of entries in the XML file. This field is used for validation purposes.</td><td>&lt;entry_count&gt;2&lt;/entry_count&gt;</td><td>R</td>
+  </tr>  
+</table>
+
+<p>Providers may add further information to the database section but it will not be captured during the indexing process, e.g.&lt;license&gt; Apache 2.0 &lt;/license&gt; </p> 
+
+<p>Note that it makes sense for small databases to provide their data to OmicsDI as a single full-repository XML file. 
+</p>
+<p>
+However, most ‘omics resources contain a large number of datasets, making it impracticable to exchange their data in a single file. Such resources may provide their data via multiple XML files in the same format as described above, each containing a distinct subset of dataset entries. Note that <i>entry_count</i> in each xml file should correspond to the number of entries in that file only, not the overall number of entries provided from that database.
+</p>
+
+<h2 id="omics-xml-db-section">OmicsDI XML: Entries Section</h2>
+
+<p>
+  The entries section contains all the datasets provided in a given XML file. The &lt;entries&gt; tag is used to list all the entries. Each dataset is enclosed in an &lt;entry&gt; tag.
+</p>
+<p>
+  Each entry consists of three different sections: <i>General information</i>, <i>Cross-references</i> and  <i>Additional Fields</i>.
+</p>
+<p>
+A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, a <i>name</i>, a <i>description</i> and a <i>date of publication</i>. In addition, other (optional) dates may be provided: <i>submission</i>, <i>updated</i> and <i>creation</i>, as listed in the table below:
+</p>
+<p>
+  <table class="table table-striped">
+    <tr>
+      <th scope="col" class="col-md-2">Field</th>
+      <th scope="col" class="col-md-5">Comment</th>
+      <th scope="col" class="col-md-5">Example</th>
+      <th scope="col" class="col-md-1">Type</th>
+    </tr>
+    <tr>
+      <td>id</td><td>Original and UNIQUE identifier across the repository, database or provider</td><td>&lt;entry id="PXD000001"&gt;&lt;/entry&gt;</td><td>M</td>
+    </tr>
+    <tr>
+      <td>name</td><td>Name, title of the dataset, can be considered as the title of the publication</td><td>&lt;name&gt;TMT spikes&lt;/name&gt;</td><td>M<td>
+    </tr>    
+    <tr>
+      <td>description</td><td>A short description or abstract of the dataset. It can be considered similar to a "publication abstract"</td><td>&lt;description&gt;Expected reporter ion ratios: Erwinia peptides&lt;/description&gt;</td><td>M<td>
+    </tr>
+    <tr>
+      <td>date</td><td>Date of publication of the dataset</td><td>&lt;date type=&#34;<b>publication</b>&#34; value=&#34;2014-09-22&#34;&gt;</td><td>M<td>
+    </tr>    
+    <tr>
+      <td>date</td><td>Date of initial creation of dataset submission in the database</td><td>&lt;date type=&#34;<b>creation</b>&#34; value=&#34;2014-09-22&#34;&gt;</td><td>A<td>
+    </tr> 
+    <tr>
+      <td>date</td><td>Date of successful submission to the database</td><td>&lt;date type=&#34;<b>submission</b>&#34; value=&#34;2014-09-22&#34;&gt;</td><td>A<td>
+    </tr> 
+    <tr>
+      <td>date</td><td>Date of the latest update to the dataset</td><td>&lt;date type=&#34;<b>updated</b>&#34; value=&#34;2014-09-22&#34;&gt;</td><td>A<td>
+    </tr>         
+  </table> 
+  For example:
+</p>
+
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
+  <span class="nt">&lt;entries&gt;</span>
+   <span class="nt">&lt;entry id=&#34;ST000004&#34;&gt;</span>
+     <span class="nt">&lt;name&gt;Lipidomics studies on NIDDK / NIST human plasma samples&lt;/name&gt;</span>
+     <span class="nt">&lt;description&gt;The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) in collaboration with the National Institute of Standards (NIST) recently produced a human plasma standard reference material (SRM 1950) for metabolite analysis.
+&lt;/description&gt;</span>
+     <span class="nt">&lt;dates&gt;</span>
+       <span class="nt">&lt;date type=&#34;creation&#34; value=&#34;2013-02-01&#34;&gt;</span>
+       <span class="nt">&lt;date type=&#34;publication&#34; value=&#34;2014-09-22&#34;&gt;</span>
+       <span class="nt">&lt;date type=&#34;submission&#34; value=&#34;2013-11-19&#34;&gt;</span>
+       <span class="nt">&lt;date type=&#34;updated&#34; value=&#34;2014-05-21&#34;&gt;</span>
+     <span class="nt">&lt;/dates&gt;</span>    
+    <span class="nt">...</span>
+   <span class="nt">&lt;/entry&gt;</span>
+   <span class="nt">...</span>
+  <span class="nt">&lt;/entries&gt;</span> 
+</code></pre></div>
+</div>
+
+<h2 id="omics-xml-additional-fields">OmicsDI XML Entry: Additional Fields</h2>
+<p>
+  All biological and experimental metadata for a given da; taset is represented using a key-value pair structure under the tag &lt;additional_fields&gt;. The generic key-value pair structure allows data providers to represent any information that is necessary to represent their dataset adequately and make it discoverable via OmicsDI search.
+</p>
+<p>
+  While OmicsDI places no restriction on the content of key-value pairs, some fields have been agreed and standardised by the 'omics community and should be provided in a consistent way. It is important to note that every key-value pair is a single representation of the value. If the user wishes to represent multiple values for the same key then the same tag should be repeated, for example:
+</p>
+  <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
+    <span class="nt">&lt;additional_fields&gt;</span>
+      <span class="nt">&lt;field name=&#34;species&#34;&gt;Homo sapiens&lt;/field&gt;</span>
+      <span class="nt">&lt;field name=&#34;species&#34;&gt;Mus musculus&lt;/field&gt;</span>
+      <span class="nt">...</span>
+    <span class="nt">&lt;/additional_fields&gt;</span>
+  </code></pre></div>
+
+  <h3 id="omics-xml-standardised-fields">Standardised fields for OmicsDI</h3>
+
+  <table class="table table-striped">
+    <tr>
+      <th scope="col" class="col-md-2">Field</th>
+      <th scope="col" class="col-md-5">Comment</th>
+      <th scope="col" class="col-md-5">Example</th>
+      <th scope="col" class="col-md-1">Type</th>
+      <th scope="col" class="col-md-2">Cardinality</th>
+    </tr>
+    <tr>
+      <td>omics_type</td><td>A category for the type of omics dataset (from a controlled vocabulary used by OmicsDI)</td><td>&lt;field name="omics_type"&gt;Proteomics&lt;/field&gt;</td><td>M</td><td>[1..n]</td>
+    </tr>
+    <tr>  
+      <td>data_protocol</td><td>Description of the software, pipeline and tools used to process the data</td><td>&lt;field name="data_protocol"&gt;&lt;/field&gt;</td><td>R</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>sample_protocol</td><td>Description of the biological sample handling protocol</td><td>&lt;field name="sample_protocol"&gt;&lt;/field&gt;</td><td>R</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>repository</td><td>The name of the repository or provider<sup><b>*</b></sup></td><td>&lt;field name="repository"&gt;PRIDE&lt;/field&gt;</td><td>M</td><td>[1]</td>      
+    </tr>
+    <tr>  
+      <td>species</td><td>Specie studied in the experiment that generated the data (Free Text)</td><td>&lt;field name="species"&gt;Homo sapiens&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>  
+    <tr>  
+      <td>disease</td><td>Disease studied in the experiment that generated the data (Free Text)</td><td>&lt;field name="disease"&gt;Lung carcinoma&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>tissue</td><td>Tissue studied in the experiment that generated the data (Free Text)</td><td>&lt;field name="tissue"&gt;Lung&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>cell_type</td><td>Cell type studied in the experiment that generated the data (Free Text)</td><td>&lt;field name="cell_type"&gt;brain cortex glial cell&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>full_dataset_link</td><td>The original link of the dataset in the provider’s web service, it should be a universal URL that can be used to find the original data</td><td>&lt;field name="full_dataset_link"&gt;<br />http://www.ebi.ac.uk/pride/archive/projects/PRD000123<br />&lt;/field&gt;</td><td>M</td><td>[1]</td>      
+    </tr> 
+    <tr>  
+      <td>submitter</td><td>Name of the person who submitted the data into the original repository</td><td>&lt;field name="submitter"&gt;Yasset Perez-Riverol&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>submitter_mail</td><td>Submitter’s contact email</td><td>&lt;field name="submitter_mail"&gt;yperez@ebi.ac.uk&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>submitter_affiliation</td><td>Submitter’s affiliation, institution, department, etc.</td><td>&lt;field name="submitter_affiliation"&gt;European Bioinformatics Institute&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>instrument_platform</td><td>Instrument used to analyze the experiment’s samples</td><td>&lt;field name="instrument_platform"&gt;LTQ Orbitrap&lt;/field&gt;</td><td>R</td><td>[0..n]</td>      
+    </tr> 
+    <tr>  
+      <td>technology_type</td><td>Technique of instrumental analysis used in the experiment</td><td>&lt;field name="technology_type"&gt;Tandem MS/MS&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>modification</td><td>Post-translational modifications; used mainly in Proteomics experiments</td><td>&lt;field name="modification"&gt;Oxidation&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>submitter_keywords</td><td>Keywords describing the dataset further, in this case added by the submitter of the data</td><td>&lt;field name="submitter_keywords"&gt;ProteoGenomics&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>quantification_method</td><td>Free text describing the quantitative method used in the data analysis</td><td>&lt;field name="quantification_method"&gt;SILAQ&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>submission_type</td><td>In ProteomeXChange this field is used to classify the type of submission</td><td>&lt;field name="submission_type"&gt;COMPLETE&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>
+    <tr>  
+      <td>software</td><td>Software used for data analysis</td><td>&lt;field name="software"&gt;Trans-Proteomics Pipeline&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr> 
+    <tr>  
+      <td>publication</td><td>Free text describing the publications, citation, title<sup><b>**</b></sup></td><td>&lt;field name="publication"&gt;Effect of Obesity on the Preovulatory Follicle.&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>     
+    <tr>  
+      <td>dataset_file</td><td>This a URL of an individual data file in the dataset.</td><td>&lt;field name="dataset_file"&gt;<br />ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2010/07/PRD000123/PRIDE_Exp_Complete_Ac_9777.xml.gz<br />&lt;/field&gt;</td><td>A</td><td>[0..n]</td>      
+    </tr>                                                                           
+  </table>
+
+  <p>
+  Please note the following comments about the above fields:
+  </p>
+  <p>
+    <sup><b>*</b></sup><i>repository</i>: The name of the repository should be provided at the dataset level because some providers can act as aggregators distributing datasets from different databases. In such cases the original repository should be provided using the field &lt;field name="repository"/&gt;.
+  </p>
+  <p>
+    <sup><b>**</b></sup><i>publication</i>: Some resources do not provide information about the PubMed article in which the dataset was published. In such cases OmicsDI provides a mechanism to add the publication as free text by means of the field &lt;field name="publication"/&gt;.      
+  </p>
+  <p>
+    The &lt;additional_fields&gt; section provides a mechanism for adding free text to OmicsDI XML and is important for search capabilities, however, is not well-designed for structured data where references and identifiers should be provided. For that information OmicsDI XML provides the &lt;cross_references&gt; section (see below).
+  </p>
+
+<h2 id="omics-xml-cross-references">OmicsDI XML Entry: Cross-reference fields</h2>
+  <p>
+    OmicsDI provides a mechanism to store and handle data that is well-referenced, structured and with common identifiers such as biological entities, ontology terms, taxonomies, publications, etc. The cross-reference fields are used for those properties that link to other indexed databases. For example, if PubMed identifier is known a cross-reference should be added referencing PubMed database.
+  </p>
+  <p>
+    Examples of cross-references to other resources are shown below:
+  </p>
+  <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
+    <span class="nt">&lt;entries&gt;</span>
+     <span class="nt">&lt;entry id=&#34;ST000004&#34;&gt;</span>
+       <span class="nt">...</span>
+       <span class="nt">&lt;cross_references&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;19770167&#34; dbname=&#34;pubmed&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;P01130&#34; dbname=&#34;uniprot&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;ENSP00000316578&#34; dbname=&#34;ensembl&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;CHEBI:30031&#34; dbname=&#34;chebi&#34;&gt;</span>
+         <span class="nt">&lt;ref dbkey=&#34;GO:0044752&#34; dbname=&#34;go&#34;&gt;</span>                          
+       <span class="nt">&lt;/cross_references&gt;</span>    
+     <span class="nt">&lt;/entry&gt;</span>
+     <span class="nt">...</span>
+    <span class="nt">&lt;/entries&gt;</span> 
+  </code></pre></div>
+
+  <h2 id="omics-xml-example">OmicsDI XML Entry: A complete example</h2>
+
+  <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
+    <span class="nt">&lt;entries&gt;</span>
+     <span class="nt">&lt;entry id=&#34;BIOMD0000000900&#34;&gt;</span>
+       <span class="nt">&lt;name&gt;Bianca2013 - Persistence analysis in a Kolmogorov-type model for cancer-immune system competition&lt;/name&gt;</span>
+       <span class="nt">&lt;description&gt;Persistence analysis in a Kolmogorov-type model for cancer-immune system competition
+        AIP Conference Proceedings 1558, 1797 (2013); https://doi.org/10.1063/1.4825874
+        C. Bianca
+        Dipartimento di Scienze Matematiche, Politecnico di Torino, Torino, Italy
+        F. Pappalardo
+        Dipartimento di Scienza del Farmaco, Università degli Studi di Catania, Catania, Italy
+        M. Pennisi and M. A. Ragusa
+        Dipartimento di Matematica e Informatica, Università degli Studi di Catania, Catania, Italy        
+  &lt;/description&gt;</span>
+       <span class="nt">&lt;dates&gt;</span>
+         <span class="nt">&lt;date type=&#34;submission&#34; value=&#34;2019-12-18&#34;&gt;</span>
+         <span class="nt">&lt;date type=&#34;publication&#34; value=&#34;2019-12-18&#34;&gt;</span>
+         <span class="nt">&lt;date type=&#34;last_modification&#34; value=&#34;2019-12-18&#34;&gt;</span>
+       <span class="nt">&lt;/dates&gt;</span>    
+       <span class="nt">&lt;additional_fields&gt;</span>
+         <span class="nt">&lt;field name=&#34;submitter&#34;&gt;Mohammad Umer Sharif Shohan&lt;/field&gt;</span>
+         <span class="nt">&lt;field name=&#34;submitter_mail&#34;&gt;msharifshohan@ebi.ac.uk&lt;/field&gt;</span>
+         <span class="nt">&lt;field name=&#34;repository&#34;&gt;BioModels&lt;/field&gt;</span>
+         <span class="nt">&lt;field name=&#34;full_dataset_link&#34;&gt;https://www.ebi.ac.uk/biomodels/BIOMD0000000900&lt;/field&gt;</span>
+         <span class="nt">&lt;field name=&#34;publication&#34;&gt;This paper is concerned with analytical investigations on the competition between cancer cells and immune system cells. Specifically the role of the B-cells and T-cells in the evolution of cancer cells is taken into account. The mathematical model is a Kolmogorov-type system of three evolution equations where the growth rate of the cells is described by logistic law and the response of B-cells and T-cells is modeled according to Holling type-II function. The stability analysis of equilibrium points is performed and the persistence of the model is proved.. 1, 1558.
+          Dipartimento di Scienze Matematiche, Politecnico di Torino, Torino, Italy
+Dipartimento di Scienza del Farmaco, Università degli Studi di Catania, Catania, Italy
+Dipartimento di Matematica e Informatica, Università degli Studi di Catania, Catania, Italy
+&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;modellingApproach&#34;&gt;Ordinary differential equation model&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;omics_type&#34;&gt;Models&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;modelFormat&#34;&gt;SBML&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;submissionId&#34;&gt;MODEL1912180002&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;publicationId&#34;&gt;BIOMD0000000900&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;publication_year&#34;&gt;2013&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;levelVersion&#34;&gt;L2V4&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;curationStatus&#34;&gt;Manually curated&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;non_derived_xrefs&#34;&gt;BIOMD0000000900 biomodels.db MODEL1912180002 biomodels.db&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;publication_authors&#34;&gt;C. Bianca, F. Pappalardo, M. Pennisi and M. A. Ragusa&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;first_author&#34;&gt;C. Bianca&lt;/field&gt;</span>
+          <span class="nt">&lt;field name=&#34;tokenised_name&#34;&gt;Bianca2013   Persistence analysis in a Kolmogorov type model for cancer immune system competition&lt;/field&gt;</span>
+        <span class="nt">&lt;/additional_fields&gt;</span>
+        <span class="nt">&lt;cross_references&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;9606&#34; dbname=&#34;taxonomy&#34;&gt;</span> 
+          <span class="nt">&lt;ref dbkey=&#34;C25513&#34; dbname=&#34;ncit&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;GO:0006955&#34; dbname=&#34;go&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;10.1063/1.4825874&#34; dbname=&#34;doi&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;10.4039/entm9745fv&#34; dbname=&#34;doi.org&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;0000311&#34; dbname=&#34;efo&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;BTO:0000776&#34; dbname=&#34;bto&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;BTO:0000782&#34; dbname=&#34;bto&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;C64914&#34; dbname=&#34;ncit&#34;&gt;</span>
+          <span class="nt">&lt;ref dbkey=&#34;C64382&#34; dbname=&#34;ncit&#34;&gt;</span>            
+        <span class="nt">&lt;/cross_references&gt;</span>
+     <span class="nt">&lt;/entry&gt;</span>
+     <span class="nt">...</span>
+    <span class="nt">&lt;/entries&gt;</span> 
+  </code></pre></div>
+</article>
+
+
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "omicsdi" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+
+  <div class="col-md-4">
+    
+<aside class="l-sidebar">
+
+  <section class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">LATESTS</div>
+    </div>
+    <div class="list-group">
+            
+      <a href="https://omicsdi.github.io/post/omicsdi-spec/" class="list-group-item">OmicsDI XML Specification</a>
+
+      <a href="https://omicsdi.github.io/post/omicsdi-spec/" class="list-group-item">OmicsDI XML Specification</a>
+
+      <a href="https://omicsdi.github.io/post/rosette-chart/" class="list-group-item">Rosette chart in OmicsDI</a>
+      
+      <a href="https://omicsdi.github.io/post/introduction-api/" class="list-group-item">Introduction to OmicsDI API</a>
+      
+      <a href="https://omicsdi.github.io/post/claiming-datasests/" class="list-group-item">Claiming datasets in OmicsDI</a>
+      
+      <a href="https://omicsdi.github.io/post/filter-results/" class="list-group-item">Filtering search results</a>
+      
+      <a href="https://omicsdi.github.io/post/searching-in-omicsdi/" class="list-group-item">Searching in OmicsDI</a>
+      
+      <a href="https://omicsdi.github.io/post/navigation-from-home/" class="list-group-item">Navigating Omics from the home page</a>
+      
+      <a href="https://omicsdi.github.io/post/welcome-to-omicsdi/" class="list-group-item">Welcome to OmicsDI Edu page</a>
+      
+      <a href="https://omicsdi.github.io/post/partners/" class="list-group-item">OmicsDI major partners</a>
+      
+    </div>
+  </section>
+
+</aside>
+
+
+  </div>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="l-footer">
+      <div class="container">
+        <p><span class="h-logo">&copy; OmicsDI Blog</span></p>
+        <aside>
+          <p>Powered by <a href="https://gohugo.io/">Hugo</a>.</p>        
+        </aside>
+      </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
