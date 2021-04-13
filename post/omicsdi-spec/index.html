@@ -215,9 +215,11 @@ Cross references section allows for linking the dataset to external databases. T
 </p>
 <p>
 OmicsDI defines a hierarchical metadata schema for each dataset, divided into three main categories: <i>Mandatory</i>, <i>Recommended</i> and <i>Additional</i>. The scoring system in the OmicsDI search engine boosts datasets that provide more metadata, thus rewarding researchers that have annotated their results more thoroughly. The following tables describe the metadata fields for each category, with examples and description in each case. This document describes the structure of OmicsDI schema version 1.0, the corresponding metadata fields and types of fields. For each field in OmicsDI schema we have defined three types of categories:
+<ul>
   <li><i>Mandatory</i> (<b>M</b>) : These fields must be provided for the OmicsDI schema to be valid, and are part of the minimum information required to represent a dataset in OmicsDI;</li>
   <li><i>Recommended</i> (<b>R</b>) : These fields should be provided to be searchable and displayed adequately in OmicsDI web interface and web services;</li>
   <li><i>Additional</i> (<b>A</b>) : These fields should be provided to add value to the dataset - the more metadata a dataset contains, the more sense OmicsDI infrastructure can make out of the data. For example, if the proteins, genes or metabolites are provided for each dataset; OmicsDI is able to find other datasets where those biological entities have been found or studied.</li>
+</ul>
 </p>
 
 <h2 id="omics-xml-db-section">OmicsDI XML: Database Section</h2>
@@ -250,10 +252,7 @@ All the information required for inclusion in OmicsDI is contained within the da
 
 <p>Providers may add further information to the database section but it will not be captured during the indexing process, e.g.&lt;license&gt; Apache 2.0 &lt;/license&gt; </p> 
 
-<p>Note that it makes sense for small databases to provide their data to OmicsDI as a single full-repository XML file. 
-</p>
-<p>
-However, most ‘omics resources contain a large number of datasets, making it impracticable to exchange their data in a single file. Such resources may provide their data via multiple XML files in the same format as described above, each containing a distinct subset of dataset entries. Note that <i>entry_count</i> in each xml file should correspond to the number of entries in that file only, not the overall number of entries provided from that database.
+<p>Note that it makes sense for small databases to provide their data to OmicsDI as a single full-repository XML file. However, most ‘omics resources contain a large number of datasets, making it impracticable to exchange their data in a single file. Such resources may provide their data via multiple XML files in the same format as described above, each containing a distinct subset of dataset entries. Note that <i>entry_count</i> in each xml file should correspond to the number of entries in that file only, not the overall number of entries provided from that database.
 </p>
 
 <h2 id="omics-xml-db-section">OmicsDI XML: Entries Section</h2>
@@ -323,9 +322,11 @@ A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, 
 <p>
   All biological and experimental metadata for a given da; taset is represented using a key-value pair structure under the tag &lt;additional_fields&gt;. The generic key-value pair structure allows data providers to represent any information that is necessary to represent their dataset adequately and make it discoverable via OmicsDI search.
 </p>
+<p>&nbsp;</p>
 <p>
   While OmicsDI places no restriction on the content of key-value pairs, some fields have been agreed and standardised by the 'omics community and should be provided in a consistent way. It is important to note that every key-value pair is a single representation of the value. If the user wishes to represent multiple values for the same key then the same tag should be repeated, for example:
 </p>
+<p>
   <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml">
     <span class="nt">&lt;additional_fields&gt;</span>
       <span class="nt">&lt;field name=&#34;species&#34;&gt;Homo sapiens&lt;/field&gt;</span>
@@ -333,6 +334,7 @@ A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, 
       <span class="nt">...</span>
     <span class="nt">&lt;/additional_fields&gt;</span>
   </code></pre></div>
+</p>
 
   <h3 id="omics-xml-standardised-fields">Standardised fields for OmicsDI</h3>
 
@@ -412,14 +414,15 @@ A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, 
   <p>
   Please note the following comments about the above fields:
   </p>
-  <div>
+  <p>&nbsp;</p>
     <p>
       <sup><b>*</b></sup><i>repository</i>: The name of the repository should be provided at the dataset level because some providers can act as aggregators distributing datasets from different databases. In such cases the original repository should be provided using the field &lt;field name="repository"/&gt;.
     </p>
+    <p>&nbsp;</p>
     <p>
       <sup><b>**</b></sup><i>publication</i>: Some resources do not provide information about the PubMed article in which the dataset was published. In such cases OmicsDI provides a mechanism to add the publication as free text by means of the field &lt;field name="publication"/&gt;.      
     </p>
- </div>  
+    <p>&nbsp;</p>
   <p>
     The &lt;additional_fields&gt; section provides a mechanism for adding free text to OmicsDI XML and is important for search capabilities, however, is not well-designed for structured data where references and identifiers should be provided. For that information OmicsDI XML provides the &lt;cross_references&gt; section (see below).
   </p>
