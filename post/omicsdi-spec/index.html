@@ -431,6 +431,23 @@ A dataset in OmicsDI must have four different attributes: an <i>identifier</i>, 
   </p>
 
 <h2 id="omics-xml-cross-references">OmicsDI XML Entry: Cross-reference fields</h2>
+	
+	 <h3 id="omics-xml-standardised-fields">Standardised fields for OmicsDI</h3>
+
+  <table class="table table-striped">
+    <tr>
+      <th scope="col" class="col-md-2">Field</th>
+      <th scope="col" class="col-md-5">Comment</th>
+      <th scope="col" class="col-md-5">Example</th>
+      <th scope="col" class="col-md-1">Type</th>
+      <th scope="col" class="col-md-2">Cardinality</th>
+    </tr>
+    <tr>
+      <td>pubmed</td><td>Pubemd Id is the publication id which is used to find similar datasets based on the publications.</td><td>&lt;field name="omics_type"&gt;Proteomics&lt;/field&gt;</td><td>M</td><td>[1..n]</td>
+    </tr>
+                                                
+  </table>
+
   <p>
     OmicsDI provides a mechanism to store and handle data that is well-referenced, structured and with common identifiers such as biological entities, ontology terms, taxonomies, publications, etc. The cross-reference fields are used for those properties that link to other indexed databases. For example, if PubMed identifier is known a cross-reference should be added referencing PubMed database.
   </p>
